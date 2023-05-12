@@ -39,6 +39,12 @@ app.get('/', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/index.html', (req, res) => {
+  const fileName = 'index.html';
+  const filePath = path.join(__dirname, 'public', fileName);
+  res.sendFile(filePath);
+});
+
 app.get('/register.html', (req, res) => {
     const fileName = 'register.html';
     const filePath = path.join(__dirname, 'public', fileName);

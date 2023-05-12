@@ -5,12 +5,10 @@ let gameBoard;
 let gameId;
 let currentPlayer = null;
 let gameInfo = document.querySelector('#game-info');
-let username = null; // Add this line
-
-// You'll need to set the username variable when the user logs in
+// The username is already declared in your ejs template
 
 ws.onopen = () => {
-  ws.send(JSON.stringify({ type: 'create', username: username })); // Add username here
+  ws.send(JSON.stringify({ type: 'create', username: username }));
 };
 
 ws.onmessage = (event) => {
@@ -42,21 +40,21 @@ ws.onmessage = (event) => {
 };
 
 function renderBoard() {
-    let cells = document.querySelectorAll('.cell');
-    cells.forEach((cell, index) => {
-        cell.textContent = gameBoard[index] !== null ? (gameBoard[index] === 0 ? 'X' : 'O') : '';
-        cell.addEventListener('click', () => {
-        if (gameBoard[index] === null && currentPlayer === player) {
-            ws.send(JSON.stringify({ type: 'move', index: index, player: player, gameId: gameId, username: username })); // Add username here
-        }
-        });
+  let cells = document.querySelectorAll('.cell');
+  cells.forEach((cell, index) => {
+    cell.textContent = gameBoard[index] !== null ? (gameBoard[index] === 0 ? 'X' : 'O') : '';
+    cell.addEventListener('click', () => {
+      if (gameBoard[index] === null && currentPlayer === player) {
+        ws.send(JSON.stringify({ type: 'move', index: index, player: player, gameId: gameId, username: username }));
+      }
     });
+  });
 }
 
 document.querySelector('#join-btn').addEventListener('click', () => {
   let input = document.querySelector('#join-input');
   gameId = input.value;
   if (gameId) {
-    ws.send(JSON.stringify({ type: 'join', gameId: gameId, username: username })); // Add username here
+    ws.send(JSON.stringify({ type: 'join', gameId: gameId, username: username }));
   }
 });
