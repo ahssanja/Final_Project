@@ -174,6 +174,7 @@ wss.on('connection', (ws) => {
             gameEndMessage = { type: 'end', message: `Player ${winner} wins!` };
             // Update winner in DB
             try {
+              console.log(User.findOne({ username: data.username }));
               await User.findOneAndUpdate(
                 { username: data.username }, 
                 { $inc: { wins: 1 } },
