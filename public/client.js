@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://46.101.182.97:8365/');
 
 let player;
 let gameBoard;
